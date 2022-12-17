@@ -19,8 +19,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.13836519918416046 -0.5071962302981302 0.8506509599278036 5.5408425361935
-  position -15.672052449797446 7.088832558254806 6.364315197431523
+  orientation -0.1761032154167292 0.7448433310607463 0.6435806629275159 0.5632053564058099
+  position -23.57298512507617 -5.0107761315721495 8.645411336869953
   follow "Pioneer 3-DX"
 }
 TexturedBackground {
@@ -60,6 +60,16 @@ DEF WALLS Group {
       rotation 0 0 1 -1.5707953071795862
       name "outer_wall"
       size 0.2 21.07 2.4
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "window_texture.jpg"
+          ]
+        }
+        textureTransform TextureTransform {
+          scale 1.02 0.5
+        }
+      }
     }
     Wall {
       translation -6.2 -3.6624 0
