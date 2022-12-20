@@ -7,7 +7,6 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/apartment_structure/protos/Wall.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/apartment_structure/protos/Door.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/advertising_board/protos/AdvertisingBoard.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/VarnishedPine.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/ScratchedPaint.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/RoughPolymer.proto"
@@ -19,8 +18,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.1761032154167292 0.7448433310607463 0.6435806629275159 0.5632053564058099
-  position -23.57298512507617 -5.0107761315721495 8.645411336869953
+  orientation 0.13651000205211666 -0.815523366976986 -0.5623936852901634 5.704609419215077
+  position -27.39545447480249 -7.5812734439442115 12.115280312068045
   follow "Pioneer 3-DX"
 }
 TexturedBackground {
@@ -38,29 +37,12 @@ DEF WALLS Group {
         }
       }
     }
-    Group {
-      children [
-        AdvertisingBoard {
-          translation -4.83 -1.47 14.03
-          rotation -0.5773509358560258 -0.5773499358561369 -0.5773499358561369 2.094395307179586
-          frontTexture [
-            "https://raw.githubusercontent.com/saracoglumert/balik/main/simulation/Webots_balik/ceilingtop.jpg"
-          ]
-          backTexture [
-            "C:/Users/Anil/Documents/SCHOOL/0. archive/2. uni (undergrad)/4.2/ME462/simulation/aruco_gen/ceiling_gen/ceiling.png"
-          ]
-          displayWidth 20.48
-          displayHeight 10.24
-          frameThickness 0.1
-        }
-      ]
-    }
     Wall {
-      translation -5 3.6625 0
+      translation -5.4 3.6625 0
       rotation 0 0 1 -1.5707953071795862
       name "outer_wall"
-      size 0.2 21.07 2.4
-      appearance PBRAppearance {
+      size 0.2 21.87 2.4
+      appearance DEF WINDOW PBRAppearance {
         baseColorMap ImageTexture {
           url [
             "window_texture.jpg"
@@ -72,10 +54,10 @@ DEF WALLS Group {
       }
     }
     Wall {
-      translation -6.2 -3.6624 0
+      translation -6.6 -3.6624 0
       rotation 0 0 1 -1.5707953071795862
       name "inner_wall_left"
-      size 0.2 18.67 2.4
+      size 0.2 19.47 2.4
     }
     Wall {
       translation 4.83 -3.6624 0
@@ -88,9 +70,10 @@ DEF WALLS Group {
       rotation 0 0 1 1.5708
     }
     Wall {
-      translation -15.435 0 0
+      translation -16.235 0 0
       name "left_wall"
       size 0.2 7.125 2.4
+      appearance USE WINDOW
     }
     Wall {
       translation 5.435 0 0
@@ -98,8 +81,8 @@ DEF WALLS Group {
       size 0.2 7.125 2.4
     }
     Floor {
-      translation -5 0 0
-      size 20.67 7.125
+      translation -5.4 0 0
+      size 21.47 7.125
       appearance ScratchedPaint {
         textureTransform TextureTransform {
           rotation 1.5
@@ -3348,19 +3331,20 @@ Robot {
 DEF WORKSHOP Group {
   children [
     Cabinet {
-      translation -11.03 -0.72 0
+      translation -12 -1.17 0
       rotation 0 0 1 3.14159
       rowsHeights [
         0.4, 0.4, 0.4, 0.4
       ]
       columnsWidths [
-        3.6, 1, 1
+        4.7
       ]
       layout [
-        "Shelf (1, 4, 3, 0)"
-        "Shelf (1, 3, 3, 0)"
-        "Shelf (1, 2, 3, 0)"
+        "Shelf (1,2,1,0)"
+        "Shelf (1,3,1,0)"
+        "Shelf (1,4,1,0)"
       ]
+      handle NULL
       primaryAppearance RoughPolymer {
         baseColor 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3370,10 +3354,10 @@ DEF WORKSHOP Group {
       secondaryAppearance NULL
     }
     Table {
-      translation -8.5 0.61 0
+      translation -8.86 0.9 0
       rotation 0 1 0 0
       name "workshop_mid_table_1"
-      size 0.95 1.5 0.74
+      size 1 1.75 0.74
       legAppearance VarnishedPine {
         colorOverride 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3382,10 +3366,10 @@ DEF WORKSHOP Group {
       }
     }
     Table {
-      translation -8.5 -0.89 0
+      translation -8.86 -0.85 0
       rotation 0 1 0 0
       name "workshop_mid_table_2"
-      size 0.95 1.5 0.74
+      size 1 1.75 0.74
       legAppearance VarnishedPine {
         colorOverride 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3394,10 +3378,10 @@ DEF WORKSHOP Group {
       }
     }
     Table {
-      translation -6.4 -0.65 0
+      translation -6.29 1.06 0
       rotation 0 1 0 0
-      name "workshop_side_table_1"
-      size 0.95 5.5 0.74
+      name "workshop_side_table_1_1"
+      size 0.91 2.1 0.74
       legAppearance VarnishedPine {
         colorOverride 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3406,10 +3390,34 @@ DEF WORKSHOP Group {
       }
     }
     Table {
-      translation -8.47 -2.92 0
+      translation -6.29 -0.84 0
+      rotation 0 1 0 0
+      name "workshop_side_table_1_2"
+      size 0.91 1.7 0.74
+      legAppearance VarnishedPine {
+        colorOverride 0.203922 0.203922 0.203922
+        textureTransform TextureTransform {
+          scale 4 5
+        }
+      }
+    }
+    Table {
+      translation -6.29 -2.54 0
+      rotation 0 1 0 0
+      name "workshop_side_table_1_3"
+      size 0.91 1.7 0.74
+      legAppearance VarnishedPine {
+        colorOverride 0.203922 0.203922 0.203922
+        textureTransform TextureTransform {
+          scale 4 5
+        }
+      }
+    }
+    Table {
+      translation -7.8 -2.93 0
       rotation 0 0 1 -1.5707953071795862
-      name "workshop_side_table_2"
-      size 0.95 3.2 0.74
+      name "workshop_side_table_2_1"
+      size 0.91 2.1 0.74
       legAppearance VarnishedPine {
         colorOverride 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3418,10 +3426,22 @@ DEF WORKSHOP Group {
       }
     }
     Table {
-      translation -10.54 -0.64 0
+      translation -9.9 -2.93 0
+      rotation 0 0 1 -1.5707953071795862
+      name "workshop_side_table_2_2"
+      size 0.91 2.1 0.74
+      legAppearance VarnishedPine {
+        colorOverride 0.203922 0.203922 0.203922
+        textureTransform TextureTransform {
+          scale 4 5
+        }
+      }
+    }
+    Table {
+      translation -11.41 -2.54 0
       rotation 0 0 1 1.0150305250839343e-06
-      name "workshop_side_table_3"
-      size 0.95 5.5 0.74
+      name "workshop_side_table_3_1"
+      size 0.91 1.7 0.74
       legAppearance VarnishedPine {
         colorOverride 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3430,11 +3450,35 @@ DEF WORKSHOP Group {
       }
     }
     Table {
-      translation -6.41 3.34 0
-      rotation 0 0 1 1.01503e-06
+      translation -11.41 -0.84 0
+      rotation 0 0 1 1.0150305250839343e-06
+      name "workshop_side_table_3_2"
+      size 0.91 1.7 0.74
+      legAppearance VarnishedPine {
+        colorOverride 0.203922 0.203922 0.203922
+        textureTransform TextureTransform {
+          scale 4 5
+        }
+      }
+    }
+    Table {
+      translation -11.41 1.06 0
+      rotation 0 0 1 1.0150305250839343e-06
+      name "workshop_side_table_3_3"
+      size 0.91 2.1 0.74
+      legAppearance VarnishedPine {
+        colorOverride 0.203922 0.203922 0.203922
+        textureTransform TextureTransform {
+          scale 4 5
+        }
+      }
+    }
+    Table {
+      translation -6.41 3.3 0
+      rotation 0 0 1 1.0150305250839343e-06
       name "Cabinet 1"
-      size 1.8 0.45 1.9
-      feetSize 0.9 0.25
+      size 1.2 0.52 2.03
+      feetSize 0.6 0.27
       trayAppearance VarnishedPine {
         colorOverride 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3446,11 +3490,11 @@ DEF WORKSHOP Group {
       }
     }
     Table {
-      translation -9.02 3.34 0
-      rotation 0 0 1 1.01503e-06
+      translation -7.63 3.3 0
+      rotation 0 0 1 1.0150305250839343e-06
       name "Cabinet 2"
-      size 1.8 0.45 1.9
-      feetSize 0.9 0.25
+      size 1.2 0.52 2.03
+      feetSize 0.6 0.27
       trayAppearance VarnishedPine {
         colorOverride 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3462,11 +3506,11 @@ DEF WORKSHOP Group {
       }
     }
     Table {
-      translation -11.48 3.34 0
-      rotation 0 0 1 1.01503e-06
+      translation -9.86 3.3 0
+      rotation 0 0 1 1.0150305250839343e-06
       name "Cabinet 3"
-      size 1.8 0.45 1.9
-      feetSize 0.9 0.25
+      size 1.2 0.52 2.03
+      feetSize 0.6 0.27
       trayAppearance VarnishedPine {
         colorOverride 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3478,11 +3522,27 @@ DEF WORKSHOP Group {
       }
     }
     Table {
-      translation -13.74 3.34 0
-      rotation 0 0 1 1.01503e-06
+      translation -12.51 3.3 0
+      rotation 0 0 1 1.0150305250839343e-06
       name "Cabinet 4"
-      size 1.8 0.45 1.9
-      feetSize 0.9 0.25
+      size 1.2 0.52 2.03
+      feetSize 0.6 0.27
+      trayAppearance VarnishedPine {
+        colorOverride 0.203922 0.203922 0.203922
+        textureTransform TextureTransform {
+          scale 10 10
+        }
+      }
+      legAppearance RoughPolymer {
+        baseColor 1 0.556863 0.0470588
+      }
+    }
+    Table {
+      translation -13.73 3.3 0
+      rotation 0 0 1 1.0150305250839343e-06
+      name "Cabinet 5"
+      size 1.2 0.52 2.03
+      feetSize 0.6 0.27
       trayAppearance VarnishedPine {
         colorOverride 0.203922 0.203922 0.203922
         textureTransform TextureTransform {
@@ -3494,9 +3554,9 @@ DEF WORKSHOP Group {
       }
     }
     Wall {
-      translation -5.635 -0.69 0
+      translation -5.635 -0.73 0
       name "Cabinets"
-      size 0.6 5.75 2.4
+      size 0.39 5.67 2.4
       appearance GlossyPaint {
         baseColor 1 0.556863 0.0470588
       }
