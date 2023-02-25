@@ -14,12 +14,13 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/GlossyPaint.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/cabinet/protos/Cabinet.proto"
 EXTERNPROTO "../protos/OfficeTable.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/apartment_structure/protos/Ceiling.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.19376627783784345 -0.0016290986040216524 -0.9810463677169425 3.158088661498917
-  position 10.557807307231636 -0.0634335320198145 5.805110559688592
+  orientation 0.297890215542423 -0.10963947075424237 -0.9482829777744712 3.8131932673717293
+  position 19.407748463086854 -14.800425408627563 20.549144696580314
 }
 TexturedBackground {
 }
@@ -29,7 +30,7 @@ DEF WALLS Group {
   children [
     Wall {
       translation 4.77 -3.08 0
-      size 1.15 0.95 2.4
+      size 1.15 0.95 3.3
       appearance RedBricks {
         textureTransform TextureTransform {
           scale 2 2.5
@@ -40,7 +41,7 @@ DEF WALLS Group {
       translation -5.4 3.6625 0
       rotation 0 0 1 -1.5707953071795862
       name "outer_wall"
-      size 0.2 21.87 2.4
+      size 0.2 21.87 3.3
       appearance DEF WINDOW PBRAppearance {
         baseColorMap ImageTexture {
           url [
@@ -56,28 +57,29 @@ DEF WALLS Group {
       translation -6.6 -3.6624 0
       rotation 0 0 1 -1.5707953071795862
       name "inner_wall_left"
-      size 0.2 19.47 2.4
+      size 0.2 19.47 3.3
     }
     Wall {
       translation 4.83 -3.6624 0
       rotation 0 0 1 -1.5707953071795862
       name "inner_wall_right"
-      size 0.2 1.4 2.4
+      size 0.2 1.4 3.3
     }
     Door {
       translation 3.635 -3.6624 0
       rotation 0 0 1 1.5708
+      size 0.2 1 3.3
     }
     Wall {
       translation -16.235 0 0
       name "left_wall"
-      size 0.2 7.125 2.4
+      size 0.2 7.125 3.3
       appearance USE WINDOW
     }
     Wall {
       translation 5.435 0 0
       name "right_wall"
-      size 0.2 7.125 2.4
+      size 0.2 7.125 3.3
     }
     Floor {
       translation -5.4 0 0
@@ -89,6 +91,10 @@ DEF WALLS Group {
         }
         metalScratch FALSE
       }
+    }
+    Ceiling {
+      translation -5.4 0 3.3
+      size 21.5 7.3
     }
   ]
 }
