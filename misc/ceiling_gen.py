@@ -2,6 +2,7 @@
 import argparse
 import cv2
 import numpy as np
+from os import path, makedirs
 
 #DEFINES
 TAG_TYPE="DICT_5X5_100"
@@ -162,6 +163,10 @@ if __name__=="__main__":
 
     args=parser.parse_args()
 
+
+    #create tags folder if it doesn't exist
+    if not path.exists("./tags"):
+        makedirs("./tags")
     #regenerates tag images on each run, a bit inefficient but caching these correctly is bothersome
     gen_tags(args.type, args.count)
     #calculate tag coordinates
