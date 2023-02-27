@@ -19,8 +19,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.297890215542423 -0.10963947075424237 -0.9482829777744712 3.8131932673717293
-  position 19.407748463086854 -14.800425408627563 20.549144696580314
+  orientation -0.1940938656986709 -0.5702367197537245 0.7982215574279229 5.4770615971591825
+  position -28.629408997036066 15.527086446843036 14.759060663342655
 }
 TexturedBackground {
 }
@@ -38,9 +38,9 @@ DEF WALLS Group {
       }
     }
     Wall {
-      translation -5.4 3.6625 0
+      translation -5.4 3.6625 -100
       rotation 0 0 1 -1.5707953071795862
-      name "outer_wall"
+      name "outer_wall_old"
       size 0.2 21.87 3.3
       appearance DEF WINDOW PBRAppearance {
         baseColorMap ImageTexture {
@@ -50,6 +50,22 @@ DEF WALLS Group {
         }
         textureTransform TextureTransform {
           scale 1.02 0.5
+        }
+      }
+    }
+    Floor {
+      translation -5.4 3.56 1.65
+      rotation 1 0 0 1.5707996938995747
+      name "outer_wall"
+      size 21.9 3.3
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "window_texture.jpg"
+          ]
+        }
+        textureTransform TextureTransform {
+          scale 0.025 0.09
         }
       }
     }
@@ -71,13 +87,31 @@ DEF WALLS Group {
       size 0.2 1 3.3
     }
     Wall {
-      translation -16.235 0 0
-      name "left_wall"
+      translation -16.235 0 -100
+      name "left_wall_old"
       size 0.2 7.125 3.3
       appearance USE WINDOW
     }
+    Floor {
+      translation -16.1 0 1.65
+      rotation 0 1 0 1.5707996938995747
+      name "left_wall"
+      size 3.3 7.13
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "window_texture.jpg"
+          ]
+        }
+        textureTransform TextureTransform {
+          rotation -1.57
+          scale 0.031 0.087
+        }
+      }
+    }
     Wall {
       translation 5.435 0 0
+      rotation 0 1 0 0
       name "right_wall"
       size 0.2 7.125 3.3
     }
