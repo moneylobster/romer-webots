@@ -2,7 +2,6 @@
 import argparse
 import cv2
 import numpy as np
-from os import path, makedirs
 
 #DEFINES
 TAG_TYPE="DICT_5X5_100"
@@ -111,12 +110,21 @@ def gen_nodes(tag_coords, tag_size):
         '}\n')
     return res
 
-def add_to_map(text, worldfile):
+def add_to_map(text, worldfile, delete):
     '''
     add the generated text to the world file.
     '''
-    with open(worldfile, 'a') as f:
-        f.write(text)
+    if not delete:
+        with open(worldfile, 'a') as f:
+            f.write(text)
+    else:
+        with open(worldfile, 'r+') as f:
+            ftext=f.read()
+            ind=ftext.index("DEF CEILING_TAGS Group {")
+            f.seek(0)
+            f.write(ftext[0:ind])
+            f.write(text)
+            f.truncate()
 
 def write_coords(text, coordfile):
     '''
@@ -153,20 +161,18 @@ if __name__=="__main__":
 ''')
     
     parser.add_argument('count', type=int, help="Number of tags to place on the ceiling.")
+    
     parser.add_argument('grid_size', type=lambda s: [int(item) for item in s.split(' ')], help="The row-column counts of the grid to lay the tags on. Format is \"x y\"")
     parser.add_argument('--room', type=lambda s: [float(item) for item in s.split(' ')], default=ROOM_COORDS, help=f"The room's corner points. Format is \"x1 y1 x2 y2\". Defaults to {ROOM_COORDS}.")
     parser.add_argument('--type', choices=ARUCO_DICT, default=TAG_TYPE, help=f"Marker type to use. Defaults to {TAG_TYPE}.")
     parser.add_argument('--size', type=float, default=TAG_SIZE, help=f"Length of an edge of the marker, in centimeters. Defaults to {TAG_SIZE}.")
-    parser.add_argument('--map', metavar="WBT FILE", default=WORLDFILE, help=f"Webots world file to add the nodes to. This currently doesn't delete any previous nodes, so you have to delete the previous ceiling_tags group yourself. Defaults to {WORLDFILE}.")
+    parser.add_argument('--map', metavar="WBT FILE", default=WORLDFILE, help=f"Webots world file to add the nodes to. This does not delete any previous marker nodes in the world by default. Using -d will delete previous markers, but use only if the marker group is the last node in your world. Defaults to {WORLDFILE}.")
     parser.add_argument('--out', metavar="OUTPUT FILE", default=COORDFILE, help=f"File to write tag coordinates to. Defaults to {COORDFILE}.")
     parser.add_argument('-p', action='store_true', help="Don't save to file, print output.")
+    parser.add_argument('-d', action='store_true', help="Delete the previous CEILING_TAGS node in the world map. USE ONLY IF THE CEILING_TAGS NODE IS THE LAST NODE IN THE WORLD MAP.")
 
     args=parser.parse_args()
 
-
-    #create tags folder if it doesn't exist
-    if not path.exists("./tags"):
-        makedirs("./tags")
     #regenerates tag images on each run, a bit inefficient but caching these correctly is bothersome
     gen_tags(args.type, args.count)
     #calculate tag coordinates
@@ -175,7 +181,7 @@ if __name__=="__main__":
     text=gen_nodes(tag_coords, args.size)
     # display/write webots nodes and tag coords
     if not args.p:
-        add_to_map(text, args.map)
+        add_to_map(text, args.map, args.d)
         write_coords(tag_coords, args.out)
     else:
         print(f"add to .wbt file:\n{text}")
